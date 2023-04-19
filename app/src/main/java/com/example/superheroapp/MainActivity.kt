@@ -4,15 +4,18 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.widget.SearchView
 import com.example.superheroapp.databinding.ActivityMainBinding
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-
+    private lateinit var retrofit: Retrofit
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        retrofit = getRetrofit()
+        initUnit()
     }
 
     private fun initUnit(){
@@ -32,5 +35,13 @@ class MainActivity : AppCompatActivity() {
     }
     private fun searchByName(query: String){
 
+    }
+
+    private fun getRetrofit():Retrofit{
+        return Retrofit
+            .Builder()
+            .baseUrl("https://www.superheroapi.com/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
     }
 }
