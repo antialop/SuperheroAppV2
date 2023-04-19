@@ -10,6 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import retrofit2.Response
 import retrofit2.create
 
 class MainActivity : AppCompatActivity() {
@@ -41,11 +42,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun searchByName(query: String) {
         CoroutineScope(Dispatchers.IO).launch {
-            val myResponse = retrofit.create(ApiService::class.java).getSuperheroes(query)
-            if(myResponse.isSuccessful){
-                Log.i("superheroes","funciona")
-            }else{
-                Log.i("superheroes","no funciona")
+            val myResponse: Response<SuperHeroDataResponse> =
+                retrofit.create(ApiService::class.java).getSuperheroes(query)
+            if (myResponse.isSuccessful) {
+                Log.i("tag", "funciona :)")
+            } else {
+                Log.i("tag", "No funciona :(")
             }
         }
     }
