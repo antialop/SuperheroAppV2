@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
 import com.example.superheroapp.databinding.ActivityMainBinding
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -39,18 +40,24 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun searchByName(query: String) {
+        binding.progressBar.isVisible = true
         CoroutineScope(Dispatchers.IO).launch {
             val myResponse: Response<SuperHeroDataResponse> =
                 retrofit.create(ApiService::class.java).getSuperheroes(query)
             if (myResponse.isSuccessful) {
-                Log.i("tag", "funciona :)")
+                Log.i("antia", "funciona :)")
                 val response: SuperHeroDataResponse? = myResponse.body()
                 if (response != null) {
-                    Log.i("tag", response.toString())
+                    Log.i("antia", response.toString())
+                    //Run en hilo principal
+                    runOnUiThread{
+                        binding.progressBar.isVisible = false
+                    }
+
                 }
 
             } else {
-                Log.i("t ag", "No funciona :(")
+                Log.i("antia", "No funciona :(")
             }
         }
     }
