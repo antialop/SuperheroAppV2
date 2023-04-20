@@ -2,6 +2,7 @@ package com.example.superheroapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.superheroapp.databinding.ActivityDetailSuperheroBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -12,9 +13,11 @@ class DetailSuperheroActivity : AppCompatActivity() {
     companion object{
         const val EXTRA_ID = "extra_id"
     }
+    private lateinit var binding:ActivityDetailSuperheroBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detail_superhero)
+        binding = ActivityDetailSuperheroBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         //Recuperar id, si el valor es null vacio
         val id : String = intent.getStringExtra(EXTRA_ID).orEmpty()
         getSuperHeroInformation(id)
@@ -22,9 +25,18 @@ class DetailSuperheroActivity : AppCompatActivity() {
 
     private fun getSuperHeroInformation(id: String) {
         CoroutineScope(Dispatchers.IO).launch{
-            getRetrofit().create(ApiService::class.java)
+           val superheroDetail = getRetrofit().create(ApiService::class.java).getSuperheroesDetail(id)
+            if(superheroDetail.body() != null){
+                runOnUiThread { createUI( superheroDetail.body()!!) }
+               
+            }
         }
     }
+
+    private fun createUI(superhero: SuperHeroDetailResponse) {
+
+    }
+
     private fun getRetrofit(): Retrofit {
         return Retrofit
             .Builder()
