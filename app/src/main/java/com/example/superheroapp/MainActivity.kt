@@ -1,5 +1,6 @@
 package com.example.superheroapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -7,6 +8,7 @@ import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.superheroapp.DetailSuperheroActivity.Companion.EXTRA_ID
 import com.example.superheroapp.databinding.ActivityMainBinding
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -80,5 +82,12 @@ class MainActivity : AppCompatActivity() {
             .baseUrl("https://superheroapi.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+    }
+
+    private fun navigateToDetail(id: String) {
+        val intent = Intent(this, DetailSuperheroActivity::class.java)
+        //Nueva pantalla recupera ID
+        intent.putExtra(EXTRA_ID, id)
+        startActivity(intent)
     }
 }
