@@ -3,8 +3,10 @@ package com.example.superheroapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.superheroapp.databinding.ActivityMainBinding
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -17,6 +19,7 @@ import retrofit2.create
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var retrofit: Retrofit
+    private lateinit var adapter: SuperheroAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -27,6 +30,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initUnit() {
 
+        //SEARCHVIEW
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             //Busca al pulsar boton
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -37,6 +41,11 @@ class MainActivity : AppCompatActivity() {
             //Busca a medida que vamos escribiendo
             override fun onQueryTextChange(newText: String?) = false
         })
+        //ADAPTER
+        adapter = SuperheroAdapter()
+        binding.rvSuperhero.setHasFixedSize(true)
+        binding.rvSuperhero.layoutManager = LinearLayoutManager(this)
+        binding.rvSuperhero.adapter = adapter
     }
 
     private fun searchByName(query: String) {
