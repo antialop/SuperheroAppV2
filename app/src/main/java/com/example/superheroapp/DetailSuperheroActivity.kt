@@ -36,6 +36,7 @@ class DetailSuperheroActivity : AppCompatActivity() {
 
     private fun createUI(superhero: SuperHeroDetailResponse) {
         Picasso.get().load(superhero.image.url).into(binding.ivSuperhero)
+        binding.tvSuperheroName.text = superhero.name
     }
 
     private fun getRetrofit(): Retrofit {
