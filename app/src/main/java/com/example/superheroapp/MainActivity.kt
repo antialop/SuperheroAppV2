@@ -34,9 +34,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             //Busca a medida que vamos escribiendo
-            override fun onQueryTextChange(newText: String?): Boolean {
-                return false
-            }
+            override fun onQueryTextChange(newText: String?) = false
         })
     }
 
@@ -46,8 +44,13 @@ class MainActivity : AppCompatActivity() {
                 retrofit.create(ApiService::class.java).getSuperheroes(query)
             if (myResponse.isSuccessful) {
                 Log.i("tag", "funciona :)")
+                val response: SuperHeroDataResponse? = myResponse.body()
+                if (response != null) {
+                    Log.i("tag", response.toString())
+                }
+
             } else {
-                Log.i("tag", "No funciona :(")
+                Log.i("t ag", "No funciona :(")
             }
         }
     }
@@ -55,7 +58,7 @@ class MainActivity : AppCompatActivity() {
     private fun getRetrofit(): Retrofit {
         return Retrofit
             .Builder()
-            .baseUrl("https://www.superheroapi.com/")
+            .baseUrl("https://superheroapi.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
