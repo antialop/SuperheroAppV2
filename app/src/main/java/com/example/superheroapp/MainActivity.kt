@@ -44,7 +44,8 @@ class MainActivity : AppCompatActivity() {
             override fun onQueryTextChange(newText: String?) = false
         })
         //ADAPTER
-        adapter = SuperheroAdapter()
+        adapter = SuperheroAdapter(){navigateToDetail(it)}
+        //adapter = SuperheroAdapter(){superheroId -> navigateToDetail(superheroId)}
         binding.rvSuperhero.setHasFixedSize(true)
         binding.rvSuperhero.layoutManager = LinearLayoutManager(this)
         binding.rvSuperhero.adapter = adapter
