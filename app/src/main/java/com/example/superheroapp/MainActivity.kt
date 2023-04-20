@@ -60,6 +60,9 @@ class MainActivity : AppCompatActivity() {
                     Log.i("antia", response.toString())
                     //Run en hilo principal
                     runOnUiThread{
+                        //call list
+                        adapter.updateList(response.superheroes)
+                        //Hide progressBar
                         binding.progressBar.isVisible = false
                     }
 
