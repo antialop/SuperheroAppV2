@@ -2,6 +2,8 @@ package com.example.superheroapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.TypedValue
+import android.view.View
 import com.example.superheroapp.databinding.ActivityDetailSuperheroBinding
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
@@ -9,6 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import kotlin.math.roundToInt
 
 class DetailSuperheroActivity : AppCompatActivity() {
     companion object{
@@ -37,6 +40,23 @@ class DetailSuperheroActivity : AppCompatActivity() {
     private fun createUI(superhero: SuperHeroDetailResponse) {
         Picasso.get().load(superhero.image.url).into(binding.ivSuperhero)
         binding.tvSuperheroName.text = superhero.name
+        prepareStats(superhero.powerstats)
+    }
+    private fun prepareStats(powerstats: PowerStatsResponse) {
+        updateHeight(binding.viewCombat, powerstats.combat)
+        updateHeight(binding.viewDurability, powerstats.durability)
+        updateHeight(binding.viewSpeed, powerstats.speed)
+        updateHeight(binding.viewStrength, powerstats.strength)
+        updateHeight(binding.viewIntelligence, powerstats.intelligence)
+        updateHeight(binding.viewPower, powerstats.power)
+    }
+    private fun updateHeight(view: View, stat:String){
+        val params = view.layoutParams
+        params.height = pxToDp(stat.toFloat())
+        view.layoutParams = params
+    }
+    private fun pxToDp(px:Float):Int{
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, px, resources.displayMetrics).roundToInt()
     }
 
     private fun getRetrofit(): Retrofit {
