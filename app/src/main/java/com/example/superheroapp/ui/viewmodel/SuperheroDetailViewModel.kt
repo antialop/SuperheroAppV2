@@ -7,10 +7,14 @@ import com.example.superheroapp.ui.domain.GetSuperheroesDetailsUseCase
 import com.example.superheroapp.ui.domain.SuperHeroDetail
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-@HiltViewModel
-class SuperheroDetailViewModel() : ViewModel() {
+import javax.inject.Inject
 
-    private val getSuperheroDetail =  GetSuperheroesDetailsUseCase()
+@HiltViewModel
+class SuperheroDetailViewModel @Inject constructor(
+    private val getSuperheroDetail: GetSuperheroesDetailsUseCase
+) : ViewModel() {
+
+
     val superheroDetail = MutableLiveData<SuperHeroDetail>()
 
     fun postDetails(id: String){

@@ -5,11 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.superheroapp.R
 import com.example.superheroapp.ui.domain.SuperheroItem
+import javax.inject.Inject
 
 //EL adaptador recibe un callBack, las id estan dentro del viewholder, variable que llame a un codigo y le pase un String
 //El metodo navigateToResult es como si estuviero dentro de la variable onItenSelected
 //Llamar a onItemSelected es commo se llamaras a navigateToResult
-class SuperheroAdapter(
+class SuperheroAdapter @Inject constructor(
     private var superheroList: List<SuperheroItem> = emptyList(),
     private val onItemSelected: (String) -> Unit
 ) :
