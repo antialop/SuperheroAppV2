@@ -8,13 +8,12 @@ import androidx.activity.viewModels
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.superheroapp.core.RetrofitHelper.getRetrofit
 import com.example.superheroapp.databinding.ActivityMainBinding
 import com.example.superheroapp.ui.view.DetailSuperheroActivity.Companion.EXTRA_ID
 import com.example.superheroapp.ui.viewmodel.SuperheroViewModel
-import dagger.hilt.EntryPoint
+import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Retrofit
-@EntryPoint
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var retrofit: Retrofit
@@ -26,7 +25,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initUnit()
-        retrofit = getRetrofit()
 
         superheroViewModel.superHeroDataResponse.observe(this, Observer {
             adapter.updateList(it)

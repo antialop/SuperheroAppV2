@@ -6,7 +6,7 @@ import com.example.superheroapp.ui.domain.SuperHeroDetail
 import com.example.superheroapp.ui.domain.toDomain
 import javax.inject.Inject
 
-class SuperheroRepository @Inject  constructor(
+class SuperheroRepository @Inject constructor(
     private val api:SuperheroService
 ){
     //Esta funcion me devuelve un SuperHero, que es el modelo que sigue la ui
