@@ -5,8 +5,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.superheroapp.ui.domain.GetSuperheroesDetailsUseCase
 import com.example.superheroapp.ui.domain.SuperHeroDetail
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-
+@HiltViewModel
 class SuperheroDetailViewModel() : ViewModel() {
 
     private val getSuperheroDetail =  GetSuperheroesDetailsUseCase()

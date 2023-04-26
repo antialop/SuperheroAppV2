@@ -5,12 +5,17 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.superheroapp.ui.domain.GetSuperheroesUseCase
 import com.example.superheroapp.ui.domain.SuperheroItem
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SuperheroViewModel : ViewModel() {
+@HiltViewModel
+class SuperheroViewModel @Inject constructor(
+    var getSuperheroUseCase:GetSuperheroesUseCase
+
+) : ViewModel() {
 
     val superHeroDataResponse = MutableLiveData<List<SuperheroItem>>()
-    var getSuperheroUseCase = GetSuperheroesUseCase()
 
 
     fun searchByName(query: String) {
