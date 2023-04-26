@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.superheroapp.core.RetrofitHelper.getRetrofit
 import com.example.superheroapp.databinding.ActivityMainBinding
+import com.example.superheroapp.ui.view.DetailSuperheroActivity.Companion.EXTRA_ID
 import com.example.superheroapp.ui.viewmodel.SuperheroViewModel
 import retrofit2.Retrofit
 
@@ -26,11 +27,9 @@ class MainActivity : AppCompatActivity() {
         initUnit()
         retrofit = getRetrofit()
 
-
         superheroViewModel.superHeroDataResponse.observe(this, Observer {
             adapter.updateList(it)
         })
-
     }
 
     private fun initUnit() {
@@ -47,16 +46,20 @@ class MainActivity : AppCompatActivity() {
             override fun onQueryTextChange(newText: String?) = false
         })
         //ADAPTER
-        adapter = SuperheroAdapter()
+        adapter = SuperheroAdapter{ navigateToDetail(it) }
+
         binding.rvSuperhero.setHasFixedSize(true)
         binding.rvSuperhero.layoutManager = LinearLayoutManager(this)
         binding.rvSuperhero.adapter = adapter
     }
 
 
-
-
-
+    private fun navigateToDetail(id: String) {
+        val intent = Intent(this, DetailSuperheroActivity::class.java)
+        Log.i("antia", id)
+        intent.putExtra(EXTRA_ID, id)
+        startActivity(intent)
+    }
 
 
 }

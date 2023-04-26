@@ -11,7 +11,7 @@ import com.example.superheroapp.ui.domain.SuperheroItem
 //Llamar a onItemSelected es commo se llamaras a navigateToResult
 class SuperheroAdapter(
     private var superheroList: List<SuperheroItem> = emptyList(),
-    //private val onItemSelected: (String) -> Unit
+    private val onItemSelected: (String) -> Unit
 ) :
     RecyclerView.Adapter<SuperheroViewHolder>() {
 
@@ -30,7 +30,6 @@ class SuperheroAdapter(
     override fun onBindViewHolder(viewholder: SuperheroViewHolder, position: Int) {
         //Ademas de pasar el objeto superheroe le pasamos el onItemSelected
         // y modificamos la funcion bind (viewHolder) pasandole la lambda onselectedIntem
-        viewholder.bind(superheroList[position])
-        //viewholder.bind(superheroList[position],onItemSelected)
+        viewholder.bind(superheroList[position],onItemSelected)
     }
 }
