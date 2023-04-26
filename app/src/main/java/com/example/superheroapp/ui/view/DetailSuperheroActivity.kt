@@ -11,8 +11,9 @@ import com.example.superheroapp.ui.domain.PowerStats
 import com.example.superheroapp.ui.domain.SuperHeroDetail
 import com.example.superheroapp.ui.viewmodel.SuperheroDetailViewModel
 import com.squareup.picasso.Picasso
+import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.roundToInt
-
+@AndroidEntryPoint
 class DetailSuperheroActivity : AppCompatActivity() {
     companion object{
         const val EXTRA_ID = "extra_id"

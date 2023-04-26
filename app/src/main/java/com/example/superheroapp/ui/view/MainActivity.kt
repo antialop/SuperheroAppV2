@@ -12,8 +12,9 @@ import com.example.superheroapp.core.RetrofitHelper.getRetrofit
 import com.example.superheroapp.databinding.ActivityMainBinding
 import com.example.superheroapp.ui.view.DetailSuperheroActivity.Companion.EXTRA_ID
 import com.example.superheroapp.ui.viewmodel.SuperheroViewModel
+import dagger.hilt.EntryPoint
 import retrofit2.Retrofit
-
+@EntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var retrofit: Retrofit
