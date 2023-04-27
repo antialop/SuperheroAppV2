@@ -10,6 +10,6 @@ class GetSuperheroesUseCase @Inject constructor(
     //El invoke es para cuando llames a la clase ya se ejecuta la funcion
     //Este metodo devuelve la funcion del repositorio getAllSuperheroes que devuelve los superheroes por nombre
     // que le pasamos el name, que es la query
-    suspend operator fun invoke(superheroName: String) = repository.getSuperheroByName(superheroName)
+    suspend operator fun invoke(superheroName: String) = repository.getSuperheroByNameFromApi(superheroName)
 
 }

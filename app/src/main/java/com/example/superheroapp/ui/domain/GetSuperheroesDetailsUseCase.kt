@@ -8,6 +8,6 @@ class GetSuperheroesDetailsUseCase @Inject constructor(
 ){
 
     suspend operator fun invoke(superheroId: String): SuperHeroDetail {
-        return repository.getSuperheroDetails(superheroId)
+        return repository.getSuperheroDetailsFromApi(superheroId)
     }
 }
