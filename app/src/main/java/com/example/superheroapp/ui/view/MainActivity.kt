@@ -10,6 +10,7 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.superheroapp.databinding.ActivityMainBinding
+import com.example.superheroapp.ui.domain.SuperheroItem
 import com.example.superheroapp.ui.view.DetailSuperheroActivity.Companion.EXTRA_ID
 import com.example.superheroapp.ui.viewmodel.SuperheroViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -17,7 +18,6 @@ import retrofit2.Retrofit
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var retrofit: Retrofit
     private lateinit var adapter: SuperheroAdapter
     private val superheroViewModel: SuperheroViewModel by viewModels()
 
@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
             override fun onQueryTextChange(newText: String?) = false
         })
         //ADAPTER
-        adapter = SuperheroAdapter{ navigateToDetail(it) }
+        adapter = SuperheroAdapter(onItemSelected = {navigateToDetail(it)}, addFavoriteSuperhero = {addFavoriteSuperHeroToDataBase(it)}, removeFavoriteSuperhero ={removeFavoriteSuperHeroToDataBase(it)})
 
         binding.rvSuperhero.setHasFixedSize(true)
         binding.rvSuperhero.layoutManager = LinearLayoutManager(this)
@@ -61,6 +61,12 @@ class MainActivity : AppCompatActivity() {
         Log.i("antia", id)
         intent.putExtra(EXTRA_ID, id)
         startActivity(intent)
+    }
+    private fun addFavoriteSuperHeroToDataBase(superheroItem: SuperheroItem){
+        superheroViewModel.insertFavoriteSuperhero(superheroItem)
+    }
+    private fun removeFavoriteSuperHeroToDataBase(superheroId: String){
+        superheroViewModel.deleteFavoriteSuperhero(superheroId)
     }
 
 

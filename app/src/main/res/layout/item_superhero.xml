@@ -36,6 +36,14 @@
 
         </FrameLayout>
 
+        <ImageView
+            android:id="@+id/favoriteStar"
+            android:layout_width="48dp"
+            android:layout_height="58dp"
+            android:layout_gravity="right"
+            android:layout_marginRight="10dp"
+            app:srcCompat="@drawable/non_favorite_heart" />
+
     </FrameLayout>
 
 </androidx.cardview.widget.CardView>

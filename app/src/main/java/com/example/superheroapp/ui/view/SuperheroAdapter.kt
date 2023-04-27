@@ -12,7 +12,9 @@ import javax.inject.Inject
 //Llamar a onItemSelected es commo se llamaras a navigateToResult
 class SuperheroAdapter @Inject constructor(
     private var superheroList: List<SuperheroItem> = emptyList(),
-    private val onItemSelected: (String) -> Unit
+    private val onItemSelected: (String) -> Unit,
+    private val addFavoriteSuperhero: (SuperheroItem) -> Unit,
+    private val removeFavoriteSuperhero: (String) -> Unit
 ) :
     RecyclerView.Adapter<SuperheroViewHolder>() {
 
@@ -31,6 +33,6 @@ class SuperheroAdapter @Inject constructor(
     override fun onBindViewHolder(viewholder: SuperheroViewHolder, position: Int) {
         //Ademas de pasar el objeto superheroe le pasamos el onItemSelected
         // y modificamos la funcion bind (viewHolder) pasandole la lambda onselectedIntem
-        viewholder.bind(superheroList[position],onItemSelected)
+        viewholder.bind(superheroList[position],onItemSelected,addFavoriteSuperhero, removeFavoriteSuperhero)
     }
 }

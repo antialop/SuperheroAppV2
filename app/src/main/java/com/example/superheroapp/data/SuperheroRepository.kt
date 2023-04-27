@@ -27,6 +27,9 @@ class SuperheroRepository @Inject constructor(
     suspend fun insertFavoriteSuperhero(favoriteSuperhero:FavoriteSuperheroEntity){
         favoriteSuperheroDao.insertFavoriteSuperhero(favoriteSuperhero)
     }
+    suspend fun removeFavSuperhero(favoriteSuperhero: String){
+        favoriteSuperheroDao.removeFavoriteSuperhero(favoriteSuperhero)
+    }
 
 
 
