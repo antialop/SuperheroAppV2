@@ -12,7 +12,7 @@ import javax.inject.Singleton
 //Dependecias de librerias o de clases que contienen interfaces
 @Module
 @InstallIn(SingletonComponent::class)
-class NetworkModule {
+object NetworkModule {
     @Singleton //Mantener una unica instancia de Retrofit
     @Provides
     fun provideRetrofit(): Retrofit {
